@@ -1,4 +1,3 @@
-import { DataFormModule } from './data-form/data-form.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -6,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { DataFormModule } from './data-form/data-form.module';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,//Para usar em conjunto com o formsModule
+    ReactiveFormsModule,//Para usar em conjunto com o formsModule para trabalhar com formularios reativos
     BrowserAnimationsModule,
-    DataFormModule
+    DataFormModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

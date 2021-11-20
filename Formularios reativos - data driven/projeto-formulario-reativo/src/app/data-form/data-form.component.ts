@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-data-form',
@@ -8,12 +8,27 @@ import { FormGroup } from '@angular/forms';
 })
 export class DataFormComponent implements OnInit {
 
-  //Variavel que representa o nosso formulario
+  //Variavel que representa o nosso formulario, onde vamos adicionar os campos
   formulario: FormGroup;
 
-  constructor() { }
+  //Segunda formula utiliada para criar formularios no angular, pelo construtor, utilizando o formbuilder
+  constructor(private formBuilder : FormBuilder) { }
 
   ngOnInit(): void {
+    //Aqui vc inicializa o formulario e dentro dele estão os campos, cada campo pode ser criado inicialmente com valor ou vc pode jogar null
+    //this.formulario = new FormGroup({
+      //nome: new FormControl('Digite seu nome'),
+     // email: new FormControl(null)
+    //});
+
+
+    //Outra forma de criar um formulario
+    this.formulario = this.formBuilder.group({
+      nome: [null],
+      email: [null]
+    })
+
+
   }
 
 }
