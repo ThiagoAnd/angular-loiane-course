@@ -22,7 +22,8 @@ export class DataFormComponent implements OnInit {
     //});
 
 
-    //Outra forma de criar um formulario
+    //Outra forma de criar um formulario. A forma de cima foi comentada, essa debaixo
+    //é com o builder, para uma pagina por exemplo, com uns 20 campos essa forma abaixo é mais enxuta
     this.formulario = this.formBuilder.group({
       nome: [null],
       email: [null]

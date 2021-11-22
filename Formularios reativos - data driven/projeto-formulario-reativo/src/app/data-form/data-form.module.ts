@@ -2,6 +2,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DataFormComponent } from './data-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormDebugComponent } from '../form-debug/form-debug.component';
 
 
 
@@ -10,6 +11,6 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     ReactiveFormsModule
   ],
-  declarations:[DataFormComponent]
+  declarations:[DataFormComponent,FormDebugComponent]
 })
 export class DataFormModule { }
