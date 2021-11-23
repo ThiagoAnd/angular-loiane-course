@@ -32,4 +32,8 @@ export class DataFormComponent implements OnInit {
 
   }
 
+  onFormSubmit(): void {
+    console.log('Name:' + this.formulario.get('nome').value);
+} 
+
 }

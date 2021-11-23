@@ -1,5 +1,5 @@
 <section class="container mt-5">
-    <form  class="form-horizontal" [formGroup]="formulario">
+    <form  class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onFormSubmit()">
         <div class="form-group">
             <div class="col-sm-12">
                 <label for="nome" class="control-label">Nome</label>
@@ -18,6 +18,6 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary ml-3">Submit</button>
-      <app-form-debug ></app-form-debug> 
+     <app-form-debug [form]="formulario"></app-form-debug> 
     </form>
 </section>
