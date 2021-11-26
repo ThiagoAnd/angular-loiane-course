@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
 
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-data-form',
@@ -31,8 +31,8 @@ export class DataFormComponent implements OnInit {
     //Outra forma de criar um formulario. A forma de cima foi comentada, essa debaixo
     //é com o builder, para uma pagina por exemplo, com uns 20 campos essa forma abaixo é mais enxuta
     this.formulario = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+      nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(10)]],
+      email: [null,Validators.email]
     })
 
 
@@ -40,8 +40,20 @@ export class DataFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.formulario);
-   // this.http.post('https://httpbin.org/post',JSON.stringify(this.formulario.value))
-   // .subscribe(dados => console.log("ddddd "+dados))
+    //Este é um site para fazer simulação HTTP, emula o envio do formulario que conseguimos emular as 4 operações Rest, ver nos videos de formulario antigo sem ser o reativo, para saber melhor
+
+    //Aqui vamos fazer uma chamada e tratar o reset do formulario
+    this.http.post('https://httpbin.org/post',JSON.stringify(this.formulario.value))
+    .subscribe(dados => {
+      console.log("ddddd "+dados);
+    //Caminho feliz vai resetar formulario
+    this.formulario.reset();
+    },
+    (erro: any)=> alert('Aconteceu um erro na chamada, vc pode simular , mudando a url da chamada'))
 } 
+
+resetar(){
+  this.formulario.reset();
+}
 
 }
