@@ -17,7 +17,7 @@ export class DataFormComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder
     ,private http : HttpClient
-    
+
     ) { }
 
   ngOnInit(): void {
@@ -32,7 +32,16 @@ export class DataFormComponent implements OnInit {
     //é com o builder, para uma pagina por exemplo, com uns 20 campos essa forma abaixo é mais enxuta
     this.formulario = this.formBuilder.group({
       nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(10)]],
-      email: [null,Validators.email]
+      email: [null,Validators.email],
+      endereco: this.formBuilder.group({
+        cep: [null],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
     })
 
 
@@ -50,10 +59,24 @@ export class DataFormComponent implements OnInit {
     this.formulario.reset();
     },
     (erro: any)=> alert('Aconteceu um erro na chamada, vc pode simular , mudando a url da chamada'))
-} 
+}
 
 resetar(){
   this.formulario.reset();
+}
+
+verificaValidTouched(campo){
+  //Utiliza o .get para acessar a referencia ao formControl do formulario
+  //E pega o campo, e verifica se o campo NÃO é valido e se foi tocado
+  return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+}
+
+//Aqui vai aplicar um css de erro caso tiver conflito
+aplicaCssErro(campo){
+  return {
+    'has-error': this.verificaValidTouched(campo),
+    'has-feedback': this.verificaValidTouched(campo)
+  }
 }
 
 }

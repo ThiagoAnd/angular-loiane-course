@@ -4,6 +4,8 @@ import { DataFormComponent } from './data-form.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
+import { CampoControlErroComponent } from '../campo-control-erro/campo-control-erro.component';
+
 
 
 
@@ -13,6 +15,6 @@ import { FormDebugComponent } from '../form-debug/form-debug.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  declarations:[DataFormComponent,FormDebugComponent]
+  declarations:[DataFormComponent,FormDebugComponent,CampoControlErroComponent]
 })
 export class DataFormModule { }
