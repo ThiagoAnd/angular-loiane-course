@@ -1,6 +1,5 @@
 import {HttpClient} from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -77,6 +76,53 @@ aplicaCssErro(campo){
     'has-error': this.verificaValidTouched(campo),
     'has-feedback': this.verificaValidTouched(campo)
   }
+}
+
+consultaCEP(){
+  let cep = this.formulario.get('endereco.cep').value;
+
+  //Faz sempre o replace de qualquer carectere que não seja um digito
+  cep = cep.replace(/\D/g,'');
+
+  if (cep != ""){
+    //Expressão regular para validar o cep
+    var validacep = /^[0-9]{8}$/;
+
+    //Valida o formato do cep
+    if(validacep.test(cep)){
+      this.resetaDados();
+
+      //Aqui utilizamos o template literal do typescript para utilizar a crase ````
+      //Assim não precisamos fazer "+cep+", só fazer ${cep}, deixando mais elegante
+      this.http.get(`//viacep.com.br/ws/${cep}/json`)
+      .subscribe(dados => this.populaDados(dados));
+    }
+
+  }
+}
+
+resetaDados(){
+  this.formulario.patchValue({
+    endereco: {
+      rua: null,
+      complemento:null,
+      cidade: null,
+      bairro: null,
+      estado:null
+    }
+  });
+}
+
+populaDados(dados){
+ this.formulario.patchValue({
+  endereco: {
+    rua: dados.logradouro,
+    complemento:dados.complemento,
+    cidade: dados.localidade,
+    bairro: dados.bairro,
+    estado:dados.uf
+  }
+ })
 }
 
 }

@@ -28,7 +28,8 @@
             <div class="form-row form-group">
                 <div class="col-md-3">
                     <label for="cep" class="control-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" formControlName="cep" />
+                    <input type="text" class="form-control" id="cep" formControlName="cep"
+                    (blur)="consultaCEP()"/>
                 </div>
 
                 <div class="col-md-3">
@@ -59,21 +60,17 @@
 
                 <div class="col-md-4">
                     <label for="cidade" class="control-label">Cidade</label>
-                    <select class="form-control" id="cidade" formControlName="cidade">
-                        <!-- <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{ cidade.nome }}</option> -->
-                    </select>
+                    <input type="text" class="form-control" id="cidade" formControlName="cidade"/>
                 </div>
 
                 <div class="col-md-3">
                     <label for="estado" class="control-label">Estado</label>
-                    <select class="form-control" id="estado" formControlName="estado">
-                        <!--<option *ngFor="let estado of estados" [value]="estado.sigla">{{ estado.nome }}</option>-->
-                    </select>
+                    <input type="text" class="form-control" id="estado" formControlName="estado" />
                 </div>
             </div>
         </div>
         <!--SUBMIT-->
-        <button type="submit" class="btn btn-primary ml-3">Submit</button>
+        <button type="submit" class="btn btn-primary ml-3" >Submit</button>
         <button class="btn btn-danger ml-3" (click)="resetar()">Cancelar</button>
 
         <app-form-debug [form]="formulario"></app-form-debug>
