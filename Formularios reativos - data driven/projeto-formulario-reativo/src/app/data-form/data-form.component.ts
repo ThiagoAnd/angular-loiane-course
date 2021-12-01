@@ -1,6 +1,8 @@
 import {HttpClient} from '@angular/common/http'
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { EstadoBr } from '../models/estado-br';
+import { DropdownService } from '../servicos/dropdown.service';
 
 @Component({
   selector: 'app-data-form',
@@ -12,14 +14,25 @@ export class DataFormComponent implements OnInit {
   //Variavel que representa o nosso formulario, onde vamos adicionar os campos
   formulario: FormGroup;
 
+  estado: EstadoBr[];
+
   //Segunda formula utiliada para criar formularios no angular, pelo construtor, utilizando o formbuilder
   constructor(
     private formBuilder : FormBuilder
     ,private http : HttpClient
+    ,private dropDownService : DropdownService
 
     ) { }
 
   ngOnInit(): void {
+
+    this.dropDownService
+          .getEstadosBr()
+              .subscribe(
+                (dados: EstadoBr[]) => {this.estado = dados;console.log(dados)}
+                );
+
+
     //Aqui vc inicializa o formulario e dentro dele estão os campos, cada campo pode ser criado inicialmente com valor ou vc pode jogar null
     //this.formulario = new FormGroup({
       //nome: new FormControl('Digite seu nome'),
