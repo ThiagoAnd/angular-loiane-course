@@ -8,7 +8,7 @@ export class DropdownService {
 
   constructor(private http: HttpClient) { }
 
-  getEstadosBr(){
+  getEstadosBr() {
     return this.http.get('assets/dados/estadosbr.json');
   }
 }

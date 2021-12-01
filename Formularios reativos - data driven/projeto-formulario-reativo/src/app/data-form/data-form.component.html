@@ -65,7 +65,9 @@
 
                 <div class="col-md-3">
                     <label for="estado" class="control-label">Estado</label>
-                    <input type="text" class="form-control" id="estado" formControlName="estado" />
+                    <select type="text" class="form-control" id="estado" formControlName="estado" >
+                      <option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.nome}}</option>
+                    </select>
                 </div>
             </div>
         </div>
