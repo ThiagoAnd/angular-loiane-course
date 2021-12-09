@@ -1,5 +1,5 @@
 # Json server
-Json-server –watch db.json 
+Json-server --watch db.json 
 
 # ProjetoHttpRequest
 

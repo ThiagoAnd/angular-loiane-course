@@ -14,7 +14,9 @@ export class CursosService {
   constructor(private http: HttpClient) { }
 
   list(){
+    //retorna tipando o retorno como um array de curso
     return this.http.get<Curso[]>(this.API)
+    //Esse pipe a loiane disse que é a forma mais facil para debugar
     .pipe(
       tap(console.log)
     );

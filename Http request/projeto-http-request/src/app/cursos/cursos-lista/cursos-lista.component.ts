@@ -15,8 +15,11 @@ export class CursosListaComponent implements OnInit {
   constructor(private service: CursosService) { }
 
   ngOnInit(): void {
+    //essa lista() retorna um observable, e eles são preguiçosos
+    //
     this.service.list()
-    .subscribe(console.log);
+    //.subscribe(console.log)
+    .subscribe(dados => this.cursos = dados);
   }
 
 }
