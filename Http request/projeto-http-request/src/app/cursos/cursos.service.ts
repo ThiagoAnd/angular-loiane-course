@@ -1,24 +1,25 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Curso } from './cursos-lista/curso';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CursosService {
-
   //readonly é um tipo que não vou poder atualizar a variavel
-  private readonly API = 'http://localhost:3000/cursos';
+  private readonly API = `${environment.API}cursos`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  list(){
+  list() {
     //retorna tipando o retorno como um array de curso
-    return this.http.get<Curso[]>(this.API)
-    //Esse pipe a loiane disse que é a forma mais facil para debugar
-    .pipe(
-      tap(console.log)
+    return (
+      this.http
+        .get<Curso[]>(this.API)
+        //Esse pipe a loiane disse que é a forma mais facil para debugar
+        .pipe(tap(console.log))
     );
   }
 }
