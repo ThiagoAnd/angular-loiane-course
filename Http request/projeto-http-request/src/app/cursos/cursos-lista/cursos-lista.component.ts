@@ -14,7 +14,7 @@ export class CursosListaComponent implements OnInit {
 
   //cursos: Curso[] = [];
 
-  cursos$!: Observable<Curso[]>;
+  cursos$!: Observable<any>;
   //Aqui criamos um subject que é um objeto que consegue emitir valor
   //Sempre que for emitido um erro, vamos emitir um valor de TRUE, por isso vai ser
   //boleano
@@ -23,7 +23,11 @@ export class CursosListaComponent implements OnInit {
   constructor(private service: CursosService) { }
 
   ngOnInit(): void {
-    //essa lista() retorna um observable, e eles são preguiçosos
+    this.onRefresh();
+  }
+
+  onRefresh(){
+        //essa lista() retorna um observable, e eles são preguiçosos
     //
     //this.service.list()
     //.subscribe(console.log)

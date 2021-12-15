@@ -17,7 +17,7 @@ export class CursosService {
     //retorna tipando o retorno como um array de curso
     return (
       this.http
-        .get<Curso[]>(this.API)
+        .get(this.API)
         //Esse pipe a loiane disse que é a forma mais facil para debugar
         //esse .pipe transforma as informações de um obsevable para fazer um output na tela
         .pipe(
