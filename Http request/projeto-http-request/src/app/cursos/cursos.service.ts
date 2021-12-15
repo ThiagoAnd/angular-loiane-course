@@ -20,7 +20,7 @@ export class CursosService {
         .get<Curso[]>(this.API)
         //Esse pipe a loiane disse que é a forma mais facil para debugar
         //esse .pipe transforma as informações de um obsevable para fazer um output na tela
-        .pipe( 
+        .pipe(
           delay(2000),
           tap(console.log))
     );
