@@ -14,6 +14,7 @@ export class CursosListaComponent implements OnInit {
 
   //cursos: Curso[] = [];
 
+  //essa exclamação é para estar explicada no one note, verificar
   cursos$!: Observable<any>;
   //Aqui criamos um subject que é um objeto que consegue emitir valor
   //Sempre que for emitido um erro, vamos emitir um valor de TRUE, por isso vai ser
@@ -39,13 +40,13 @@ export class CursosListaComponent implements OnInit {
         error => {
           console.log("Ocorreu um erro")
           console.error(error)
-          //Precisamos retornar um observable
+          //Precisamos retornar um observable no catchError
           //Retornamos empty() ou of() para dizer que retornamos
           // um vazio, pois de acordo com a logica, é esperado algum retorno
           //no this.cursos$  e se retornar um erro, ele vai tentar fazer a iteração
           // e consequentemente vai dar erro no FOR EACH.
           //Aqui vamos emitir o valor para esse erro que vai ser o true
-          //Emitindo, ele vai ser capturado no NGIF do pipe async
+          //Emitindo true, ele vai ser capturado no NGIF do pipe async
           this.error$.next(true);
           return of();
 
