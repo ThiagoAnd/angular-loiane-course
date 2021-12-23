@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AppModule } from './../../app.module';
+import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { empty, Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CursosService } from '../cursos.service';
@@ -21,13 +23,26 @@ export class CursosListaComponent implements OnInit {
   //boleano
   error$ = new Subject <boolean>();
 
+  mensagem :string = 'testando mensagem';
+  tipo :string = 'danger';
+
+
+
+  //@ViewChild(AlertModalComponent) child!: AlertModalComponent;
+  //@ViewChild('elemento') elemento!: ElementRef;
+
   constructor(private service: CursosService) { }
 
   ngOnInit(): void {
     this.onRefresh();
   }
 
+  mudar(){
+    //this.child.mensagem.replace.;
+  }
+
   onRefresh(){
+
         //essa lista() retorna um observable, e eles são preguiçosos
     //
     //this.service.list()
