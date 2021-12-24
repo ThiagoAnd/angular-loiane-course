@@ -1,1 +1,11 @@
-<p>cursos-form works!</p>
+<form class="needs-validation" novalidate [formGroup]="formulario">
+  <div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="nome">Nome do curso</label>
+      <input type="text" class="form-control" id="nome" placeholder="nome do curso"/>
+      <div class="valid-feedback">
+        Looks good!
+      </div>
+    </div>
+  </div>
+</form>

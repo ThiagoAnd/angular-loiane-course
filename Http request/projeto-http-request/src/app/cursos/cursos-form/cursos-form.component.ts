@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cursos-form',
@@ -8,11 +8,17 @@ import { FormGroup } from '@angular/forms';
 })
 export class CursosFormComponent implements OnInit {
 
-  form!: FormGroup;
+  //O formgroup faz com q nosso formulario funcione como uma arvore, ele mapeia
+  formulario!: FormGroup;
 
-  constructor() { }
+  //FormBuilder é necessario para criar form de forma reativa
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.formulario = this.fb.group({
+      //atributo: valorInicial,ArrayDeValidacoes
+      nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(250)]]
+    })
   }
 
 }

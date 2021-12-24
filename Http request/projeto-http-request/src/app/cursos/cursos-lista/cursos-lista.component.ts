@@ -63,6 +63,10 @@ export class CursosListaComponent implements OnInit {
           //Aqui vamos emitir o valor para esse erro que vai ser o true
           //Emitindo true, ele vai ser capturado no NGIF do pipe async
           this.error$.next(true);
+
+          //Para mostrar o alerta na pagina, vc coloca ele aqui dentro e tira o
+          //this.error next, o retorn of vc deixa, assim quando der um
+          //erro vai mostrar o alerta, e vc clica no x dele pra fechar.
           return of();
 
         }
