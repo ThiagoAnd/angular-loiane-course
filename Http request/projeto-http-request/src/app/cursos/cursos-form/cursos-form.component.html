@@ -1,11 +1,46 @@
-<form class="needs-validation" novalidate [formGroup]="formulario">
+<form
+  class="needs-validation"
+  novalidate
+  [formGroup]="formulario"
+  style="margin-top: 10px"
+>
   <div class="form-row">
-    <div class="col-md-4 mb-3">
+    <div class="sm-12">
       <label for="nome">Nome do curso</label>
-      <input type="text" class="form-control" id="nome" placeholder="nome do curso"/>
-      <div class="valid-feedback">
-        Looks good!
+      <input
+        type="text"
+        class="form-control"
+        id="nome"
+        placeholder="nome do Curso"
+        formControlName="nome"
+        [ngClass]="{ 'is-invalid': submited && hasErrors('nome') }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="'nome' && formulario.controls['nome'].errors?.required"
+      >
+        Por favor informe um nome para o curso
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="'nome' && formulario.controls['nome'].errors?.minlength"
+      >
+        Por favor precisa ter no minimo 3 caracteres para ao curso
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="'nome' && formulario.controls['nome'].errors?.maxlength"
+      >
+        Por favor precisa ter no maximo 250 caracteres para o curso
       </div>
     </div>
+  </div>
+  <div style="margin-top: 10px">
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary">
+      Salvar
+    </button>
+    <button type="button" (click)="onCancel()" class="btn btn-default">
+      Cancelar
+    </button>
   </div>
 </form>
