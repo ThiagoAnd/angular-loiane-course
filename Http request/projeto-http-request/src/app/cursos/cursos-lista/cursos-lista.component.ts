@@ -5,6 +5,7 @@ import { empty, Observable, of, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CursosService } from '../cursos.service';
 import { Curso } from './curso';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -31,7 +32,8 @@ export class CursosListaComponent implements OnInit {
   //@ViewChild(AlertModalComponent) child!: AlertModalComponent;
   //@ViewChild('elemento') elemento!: ElementRef;
 
-  constructor(private service: CursosService) { }
+  constructor(private service: CursosService,
+    private router:Router, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.onRefresh();
@@ -72,6 +74,15 @@ export class CursosListaComponent implements OnInit {
         }
       )
     );
+  }
+
+  onEdit(id:number){
+    //Esse primeiro modo é caso vc não quiser colocar a url inteira, exemplo:
+    //cursos/editar, então vc vai ter que dizer que vai navegar, relacionado a sua rota
+    //atual, e para isso usamos o route. Ou então vc coloca a url inteira, como no segundo caso
+    //que vou deixar ativo
+    //this.router.navigate(['editar',id],{relativeTo:this.route});
+    this.router.navigate(['cursos/editar',id])
   }
 
 }

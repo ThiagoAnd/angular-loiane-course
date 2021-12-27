@@ -26,6 +26,14 @@ export class CursosService {
     );
   }
 
+  loadById(id:any){
+    //No jsonServer vc faz API/ID que ela retorna o cursos
+    //Quando bater em alguma outra API verificar o retorno
+    //E fazemos o take 1 para dizer que só vamos bater uma vez e não vai
+    //ser preciso ficar escutando, vai ja para completo
+    return this.http.get<Curso>(`${this.API}/${id}`).pipe(take(1))
+  }
+
   create(curso: Curso){
     return this.http.post(this.API,curso).pipe(take(1))
   }

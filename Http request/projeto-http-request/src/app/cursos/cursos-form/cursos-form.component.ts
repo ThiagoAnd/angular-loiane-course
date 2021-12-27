@@ -2,6 +2,9 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CursosService } from '../cursos.service';
+import { ActivatedRoute } from '@angular/router';
+import { Curso } from '../cursos-lista/curso';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cursos-form',
@@ -17,18 +20,74 @@ export class CursosFormComponent implements OnInit {
   submited = false;
 
   //FormBuilder é necessario para criar form de forma reativa
-  constructor(private fb: FormBuilder,private service:CursosService,private location: Location) { }
+  constructor(private fb: FormBuilder,
+    private service:CursosService,
+    private location: Location,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    //Esse metodo funciona mas abaixo vamos refatorar ele
+/*     this.route.params.subscribe(
+      (params:any) => {
+        //Acessar como . ou acessar como array
+        const id = params.id;
+        //const id = params['id'];
+        //console.log(id)
+        //Pega o curso, que sera um observable, eu setei o
+        //diamond operator, mas pode voltar sem se quiser
+        const curso$ = this.service.loadById(id);
+        //Com esse curso em mãos vc tem que fazer um subscribe se não
+        //ele não faz nada, e dai vc atualiza o formulario do html com o updateForm
+        curso$.subscribe(
+          curso =>{
+            this.updateForm(curso)
+          }
+        );
+      }
+    ) */
+
+    //Verificar o route.params é uma das exceções de que não precisamos fazer o
+    //unsubscribe, pois o Angular cuida disso, assim como ele faz com pipe async
+        this.route.params
+        .pipe(
+          //Mapeia o valor recebido e volta valor modificado
+          map((params:any) => params['id']),
+          //O id que é retornado nesse map de cima, vai para esse switchMap abaixo pelo return
+          //do metodo acima
+          //nesse switchMap é retornado o curso associado a esse ID
+          //O switchMap retorna um observable, portanto
+          //quando fazemos o .subscribe abaixo, na verdade estamos fazendo o subscribe
+          //desse switchMap agora, não do map e nem do route params (que apesar de que tambem retorna um observable, não é ele tratado abaixo)
+          switchMap(id => this.service.loadById(id))
+          //Se eu quiser eu posso ir enfileirando o switchMpa
+          //Com novas requisições e ele vai devolvendo, como se fosse o Apache Camel
+        )
+        .subscribe(
+          //curso retornado do observable switchMap
+        curso => this.updateForm(curso)
+         )
+
+
+//Devemos sempre inicializar nosso formulario
+//para poder trabalhar depois com os campos que tem nele
     this.formulario = this.fb.group({
+      id:[null],
       //atributo: valorInicial,ArrayDeValidacoes
       nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(250)]]
     })
   }
 
+  updateForm(curso: Curso){
+    this.formulario.patchValue({
+      id: curso.id,
+      nome: curso.nome
+    })
+  }
+
   onSubmit(){
     this.submited = true;
-    console.log(this.formulario.value)
+    //console.log(this.formulario.value)
     //Brincando tentando testar o operador ternario, se for valido console, se não volta null
     this.formulario.valid ? console.log('submit'):null
 
@@ -44,6 +103,8 @@ export class CursosFormComponent implements OnInit {
     }
 
   }
+
+
 
   onCancel(){
     this.submited = false;
