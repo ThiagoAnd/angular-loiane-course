@@ -49,41 +49,50 @@ export class CursosFormComponent implements OnInit {
 
     //Verificar o route.params é uma das exceções de que não precisamos fazer o
     //unsubscribe, pois o Angular cuida disso, assim como ele faz com pipe async
-        this.route.params
-        .pipe(
+       // this.route.params
+        //.pipe(
           //Mapeia o valor recebido e volta valor modificado
-          map((params:any) => params['id']),
+       //   map((params:any) => params['id']),
           //O id que é retornado nesse map de cima, vai para esse switchMap abaixo pelo return
           //do metodo acima
           //nesse switchMap é retornado o curso associado a esse ID
           //O switchMap retorna um observable, portanto
           //quando fazemos o .subscribe abaixo, na verdade estamos fazendo o subscribe
           //desse switchMap agora, não do map e nem do route params (que apesar de que tambem retorna um observable, não é ele tratado abaixo)
-          switchMap(id => this.service.loadById(id))
+        //  switchMap(id => this.service.loadById(id))
           //Se eu quiser eu posso ir enfileirando o switchMpa
           //Com novas requisições e ele vai devolvendo, como se fosse o Apache Camel
-        )
-        .subscribe(
+      //  )
+      //  .subscribe(
           //curso retornado do observable switchMap
-        curso => this.updateForm(curso)
-         )
+      //  curso => this.updateForm(curso)
+      //   )
 
+
+      //Agora que temos o guarda de rotas fazemos assim:
+      //Agora que temos uma rota, vamos ter a foto da nossa rota
+      //ja com o curso, ou seja, vamos poupar alguns segundos e deixar
+      //o codigo mais enxuto
+      const curso = this.route.snapshot.data['cursoVariavel']
 
 //Devemos sempre inicializar nosso formulario
 //para poder trabalhar depois com os campos que tem nele
     this.formulario = this.fb.group({
-      id:[null],
+      //id:[null],
+      id:[curso.id],
       //atributo: valorInicial,ArrayDeValidacoes
-      nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(250)]]
+      //nome: [null,[Validators.required,Validators.minLength(3),Validators.maxLength(250)]]
+      nome: [curso.nome,[Validators.required,Validators.minLength(3),Validators.maxLength(250)]]
     })
   }
 
-  updateForm(curso: Curso){
+//esse update form era utlizado antes de usar o guarda de rotas
+  /*updateForm(curso: Curso){
     this.formulario.patchValue({
       id: curso.id,
       nome: curso.nome
     })
-  }
+  }*/
 
   onSubmit(){
     this.submited = true;
