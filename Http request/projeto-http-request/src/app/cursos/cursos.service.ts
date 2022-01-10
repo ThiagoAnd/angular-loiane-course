@@ -38,7 +38,7 @@ export class CursosService {
     return this.http.post(this.API,curso).pipe(take(1))
   }
 
-  //Com o take 1, a partir da ida e volta do servidor , ja finaliza o observable
+  //Com o take 1, a partir da ida e volta do servidor , ja finaliza o observable e não precisa fazer unsubscribe
   private update(curso: Curso){
     return this.http.put(`${this.API}/${curso.id}`,curso).pipe(take(1))
   }

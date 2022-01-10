@@ -1,3 +1,4 @@
+import { GeralService } from './../../shared/geral.service';
 import { AppModule } from './../../app.module';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -32,7 +33,8 @@ export class CursosListaComponent implements OnInit {
   constructor(
     private service: CursosService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private geralService: GeralService
   ) {}
 
   ngOnInit(): void {
@@ -80,13 +82,16 @@ export class CursosListaComponent implements OnInit {
     this.router.navigate(['cursos/editar', id]);
   }
 
+  //Aqui usei o confirm("....") do javascript para mostrar uma popup com opção OK/CANCEL que retorna um boolean.
   onDelete(curso: Curso) {
-    let escolha = confirm('Gostaria de remover o registro? ');
+
+    //Aqui embaixo é uma logica funcionando com o alert do javascript, vamos usar agora modal do bootstrap que vai estar acima
+    /*let escolha = confirm('Gostaria de remover o registro? ');
    if (escolha){
      this.service.remove(curso.id).subscribe(
        sucesso => this.onRefresh(),
        erro => console.log('Ocorreu um erro')
      )
-   }
+   }*/
   }
 }
