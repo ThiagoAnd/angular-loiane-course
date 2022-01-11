@@ -33,8 +33,8 @@ export class CursosListaComponent implements OnInit {
   constructor(
     private service: CursosService,
     private router: Router,
+    private geralService: GeralService,
     private route: ActivatedRoute,
-    private geralService: GeralService
   ) {}
 
   ngOnInit(): void {
@@ -85,6 +85,7 @@ export class CursosListaComponent implements OnInit {
   //Aqui usei o confirm("....") do javascript para mostrar uma popup com opção OK/CANCEL que retorna um boolean.
   onDelete(curso: Curso) {
 
+    this.geralService.showConfirm("Confirmacao","Tem certeza que deseja remover esse curso?");
     //Aqui embaixo é uma logica funcionando com o alert do javascript, vamos usar agora modal do bootstrap que vai estar acima
     /*let escolha = confirm('Gostaria de remover o registro? ');
    if (escolha){

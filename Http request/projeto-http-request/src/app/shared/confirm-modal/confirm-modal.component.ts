@@ -18,11 +18,13 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   onClose(){
-   this.bsModalRef.hide;
+    console.log("testando onClose")
+    console.log(this.bsModalRef)
+   this.bsModalRef.hide();
   }
 
   onConfirm(){
-    
+
   }
 
 }

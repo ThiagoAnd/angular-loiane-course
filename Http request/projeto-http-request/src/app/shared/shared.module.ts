@@ -8,9 +8,10 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 @NgModule({
   declarations: [AlertModalComponent, ConfirmModalComponent],
   exports: [AlertModalComponent],
-  entryComponents: [ConfirmModalComponent],
+  // entryComponents não é necessário a partir do angular v9
+  //entryComponents: [ConfirmModalComponent],
   imports: [
     CommonModule
-  ]
+  ],
 })
 export class SharedModule { }
