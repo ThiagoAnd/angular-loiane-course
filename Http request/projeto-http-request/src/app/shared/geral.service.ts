@@ -26,7 +26,9 @@ export class GeralService {
     if(cancelButton){
       bsModalRef.content.cancelButton = cancelButton;
     }
-
-
+    //Se quisermos o intelisense, ou seja , o auto complete, podemos fazer o cast
+    //do bsModalRef.content, que sabemos que é um confirmModalComponent, dai vamos poder dar auto complete
+    //Mas não é obrigado
+    return (<ConfirmModalComponent>bsModalRef.content).confirmResult$;
   }
 }

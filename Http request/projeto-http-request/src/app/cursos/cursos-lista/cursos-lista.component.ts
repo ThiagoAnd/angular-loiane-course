@@ -2,8 +2,8 @@ import { GeralService } from './../../shared/geral.service';
 import { AppModule } from './../../app.module';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { empty, Observable, of, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { EMPTY, empty, Observable, of, Subject } from 'rxjs';
+import { catchError, take, switchMap } from 'rxjs/operators';
 import { CursosService } from '../cursos.service';
 import { Curso } from './curso';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -85,7 +85,18 @@ export class CursosListaComponent implements OnInit {
   //Aqui usei o confirm("....") do javascript para mostrar uma popup com opção OK/CANCEL que retorna um boolean.
   onDelete(curso: Curso) {
 
-    this.geralService.showConfirm("Confirmacao","Tem certeza que deseja remover esse curso?");
+    const result$ = this.geralService.showConfirm("Confirmacao","Tem certeza que deseja remover esse curso?");
+    result$.asObservable()
+    .pipe(
+      take(1),
+      //Esse EMPTY entrou no lugar do empty()
+      switchMap(resultBoolean => resultBoolean ? this.service.remove(curso.id): EMPTY)
+      //A cadeia do subscribe só é executado se resultBoolean for verdadeiro, pois
+      //caso for salvo, o observable é finalizado por aqui.
+    ).subscribe(
+      sucesso => this.onRefresh(),
+      erro => console.log("Erro ao deletar curso")
+    )
     //Aqui embaixo é uma logica funcionando com o alert do javascript, vamos usar agora modal do bootstrap que vai estar acima
     /*let escolha = confirm('Gostaria de remover o registro? ');
    if (escolha){
