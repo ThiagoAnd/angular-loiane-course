@@ -5,6 +5,7 @@ import { CursosService } from '../cursos.service';
 import { ActivatedRoute } from '@angular/router';
 import { Curso } from '../cursos-lista/curso';
 import { map, switchMap } from 'rxjs/operators';
+import { CursosRepositoryServiceService } from '../cursos-repository-service.service';
 
 @Component({
   selector: 'app-cursos-form',
@@ -21,7 +22,9 @@ export class CursosFormComponent implements OnInit {
   //FormBuilder é necessario para criar form de forma reativa
   constructor(
     private fb: FormBuilder,
-    private service: CursosService,
+    //Mudando o service para o cursos service repositorio que usa generics, tambem mudei na parte da listagem
+    //private service: CursosService,
+    private service: CursosRepositoryServiceService,
     private location: Location,
     private route: ActivatedRoute
   ) {}

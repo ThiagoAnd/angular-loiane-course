@@ -7,6 +7,7 @@ import { catchError, take, switchMap } from 'rxjs/operators';
 import { CursosService } from '../cursos.service';
 import { Curso } from './curso';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CursosRepositoryServiceService } from '../cursos-repository-service.service';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -31,7 +32,10 @@ export class CursosListaComponent implements OnInit {
   //@ViewChild('elemento') elemento!: ElementRef;
 
   constructor(
-    private service: CursosService,
+    //Esse abaixo não vai ser mais usado pois vamos usar aquele cursos repository que foi criado
+    //para funcionar com generics
+    //private service: CursosService,
+    private service : CursosRepositoryServiceService,
     private router: Router,
     private geralService: GeralService,
     private route: ActivatedRoute,
