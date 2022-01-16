@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#node js thiago
+server-nodejs/node_modules
+server-nodejs/uploads
