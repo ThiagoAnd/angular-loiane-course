@@ -1,3 +1,4 @@
+import { UploadFileService } from './../upload-file.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadFileComponent implements OnInit {
 
-  constructor() { }
+  //Aqui criamos um set de arquivos, não é um array pq array aceita itens duplicados, e não queremos isso.
+  files!:Set<File>;
+
+  constructor(private service: UploadFileService) { }
 
   ngOnInit(): void {
   }
@@ -20,13 +24,24 @@ export class UploadFileComponent implements OnInit {
    // document.getElementById('customFileLabel')!.innerHTML = selectedFiles[0].name;
 
    const fileNames: any[] = [];
+   this.files = new Set();
    for(let i = 0; i< selectedFiles.length; i++){
      fileNames.push(selectedFiles[i].name)
+     this.files.add(selectedFiles[i])
    }
    // cria um array e coloca os nomes dos arquivos que forem enviados, depois pega o inner html
    //da label e usa o join do javascript que transforma os elementos do array em uma unica string
    // separada por virgula e espaço
-   document.getElementById('customFileLabel')!.innerHTML = fileNames.join(', ')
+   document.getElementById('customFileLabel')!.innerHTML = fileNames.join(',  ')
+  }
+
+  onUpload(){
+    if (this.files && this.files.size > 0){
+      this.service.upload(this.files,'http://localhost:8000/upload')
+      .subscribe(
+        response => console.log('upload concluido')
+      );
+    }
   }
 
 }
