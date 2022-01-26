@@ -1,5 +1,8 @@
-# Json server
+# Json server - Necessario para testar a parte de formulario - CRUD
 Json-server --watch db.json 
+
+# Node server - Necessario para testar a parte de upload de arquivos
+npm start dentro da pasta server-nodejs
 
 # ProjetoHttpRequest
 

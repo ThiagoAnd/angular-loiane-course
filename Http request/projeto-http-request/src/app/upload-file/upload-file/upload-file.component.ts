@@ -37,7 +37,10 @@ export class UploadFileComponent implements OnInit {
 
   onUpload(){
     if (this.files && this.files.size > 0){
-      this.service.upload(this.files,'http://localhost:8000/upload')
+      //Aqui substituimos o localhost por api, e ela é setada no arquivo proxy.config
+      //nos vamos faazer assim pois desabilitamos o CORS na api node e jogamos essa configuração de acesso para esse arquivo de proxy
+      this.service.upload(this.files,'/api/upload')
+      //this.service.upload(this.files,'http://localhost:8000/upload')
       .subscribe(
         response => console.log('upload concluido')
       );

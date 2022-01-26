@@ -15,20 +15,26 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(bodyParser.urlencoded({extended : true}))
 //o nosso codigo angular esta rodando na 4200
 //o codigo nodejs vai rodar 8000
-//mesmo sendo localhost , por em portas diferentes significa ser um dominio diferente
+//mesmo sendo localhost , por estar em portas diferentes significa ser um dominio diferente
 //por questões de segurança do javascript , não é possivel dominios diferentes se comunicarem
 //isso é uma questão de segurança, pois senaõ poderiamos pegar consumir a api de qualquer site.
 //a nossa api precisa deixar explicito que vc vai aceitar requisições de dominios diferentes
+//E para deixar isso explicito, nos precisamos ativar o CORS, apenas para testes localhost, eu nao sei como se comporta externamente
+//por exemplo, blz, e como elas vão se comunicar externamente?
 
+//Aqui eu desabilitei agora o CORS pois nos vamos utilizar o proxy no angular
+//Se não tivesse o proxy do angular habilitado, e esse cors ainda tivesse comentado
+//quando tentassemos fazer o upload, ia dar um erro no console do chrome dizendo que a requisição foi barrada pela politica do CORS
+//Access to XMLHttpRequest at 'http://localhost:8000/upload' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+// //aqui vamos ter o CORS habilitado
+// //esse asterisco mostra que qualquer um pode acessar a nossa API
+// const corsOptions = {
+//   origin: '*',
+//   optionSucessStatus: 200
+// };
 
-//aqui vamos ter o CORS habilitado
-const corsOptions = {
-  origin: '*',
-  optionSucessStatus: 200
-};
-
-//segundo middleware é o cors, o primeiro é o body parser
-app.use(cors(corsOptions))
+// //segundo middleware é o cors, o primeiro é o body parser
+// app.use(cors(corsOptions))
 
 //A pasta que vamos salvar será ./uploads
 const multiplartMiddleWare = multipart({uploadDir: './uploads'})
@@ -43,7 +49,7 @@ app.post('/upload',multiplartMiddleWare,(req,resp)=>{
 })
 
 //funcao que vai capturar qualquer erro mp servidor
-app.use((err,req,resp,next) => res.json({error : err.message}))
+app.use((err,req,res,next) => res.json({error : err.message}))
 
 app.listen(8000,()=>{
   console.log('servidor iniciado na porta 8000')

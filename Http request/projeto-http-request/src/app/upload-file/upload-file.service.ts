@@ -14,6 +14,7 @@ const formData = new FormData();
 //Aqui nesse metodo nos jogamos um set de arquivos, mas se vc
 //for passar o formulario.value vc vai fazer a iteração do form.value
 //e fazer um apend no formData, do jeito que é feito com os arquivos aqui abaixo
+//formData.append("Nome do atributo, geralmente file", blob(um arquivo), nome do arquivo do tipo file)
 files.forEach(file => formData.append('file',file,file.name))
 //Aqui é demonstrado como fazer um httpRequest na mão no angular
   const request = new HttpRequest('POST',url,formData);
