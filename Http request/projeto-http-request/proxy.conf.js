@@ -7,6 +7,7 @@
 //então a chamada ao inves de ficar localhost:8000/api/upload fica localhost:8000/upload
 //depois de setado esse arquivo nos vamos la no package.json e setamos no script de start um --proxy-config nomeDoArquivo(esse no caso que seria proxy.conf.js)
 //depois disso só da npm start que ele vai pegar essa configuração
+//Vc tambem pode escrever esse arquivo como um json, dai não vai precisar desse const e nem de exports, ver a aula 138 da loiane sobre angular para saber
 const PROXY_CONFIG = [
 {
   context: ['/api'],

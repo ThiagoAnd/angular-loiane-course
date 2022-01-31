@@ -17,10 +17,16 @@ const formData = new FormData();
 //formData.append("Nome do atributo, geralmente file", blob(um arquivo), nome do arquivo do tipo file)
 files.forEach(file => formData.append('file',file,file.name))
 //Aqui é demonstrado como fazer um httpRequest na mão no angular
-  const request = new HttpRequest('POST',url,formData);
-  return this.http.request(request);
-
+ // const request = new HttpRequest('POST',url,formData);
+ // return this.http.request(request);
   //Aqui embaixo é a forma tradicional que fazemos
   //return this.http.post(url,formData);
+
+  return this.http.post(url,formData,{
+    //O angular vai reportar todos os eventos http que estão acontecendo
+    observe: 'events',
+    // Aqui nos vamos setar para ele reportar o evento de progresso, que é o type 1 que aparece em qualquer response
+    reportProgress: true
+  })
 }
 }

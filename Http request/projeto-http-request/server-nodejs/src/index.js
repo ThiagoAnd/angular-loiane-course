@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 //app.use(bodyParser.json())
 //app.use(bodyParser.urlencoded({extended : true}))
 //o nosso codigo angular esta rodando na 4200
-//o codigo nodejs vai rodar 8000
+//o codigo nodejs que criamos vai rodar 8000 (só entrar na pasta node-server e digitar npm start)
 //mesmo sendo localhost , por estar em portas diferentes significa ser um dominio diferente
 //por questões de segurança do javascript , não é possivel dominios diferentes se comunicarem
 //isso é uma questão de segurança, pois senaõ poderiamos pegar consumir a api de qualquer site.
