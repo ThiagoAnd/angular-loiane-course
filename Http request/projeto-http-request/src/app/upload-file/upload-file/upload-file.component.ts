@@ -1,6 +1,7 @@
 import { UploadFileService } from './../upload-file.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpEvent } from '@angular/common/http';
+import { filtrarResponse, uploadProgresso } from '../../shared/rxjs-operators';
 
 @Component({
   selector: 'app-upload-file',
@@ -41,32 +42,50 @@ export class UploadFileComponent implements OnInit {
             this.progress = 0;
   }
 
-  onUpload() {
-    if (this.files && this.files.size > 0) {
-      //Aqui substituimos o localhost por api, e ela é setada no arquivo proxy.config
-      //nos vamos faazer assim pois desabilitamos o CORS na api node e jogamos essa configuração de acesso para esse arquivo de proxy
+onUpload(){
+      if (this.files && this.files.size > 0) {
+
       this.service
-        .upload(this.files, '/api/upload')
-        //this.service.upload(this.files,'http://localhost:8000/upload')
-        //Aqui nos tipamos o que recebemos no subscribe como event do tipo HttpEvent que vai ser Object
-        //vai ser object pq as vezes pode ser um response, um header response, um progresso, etc
-        //nos vamos tipar pq vai ser mais facil pegar o auto complete
-        .subscribe((event: HttpEvent<Object>) => {
-          //Aqui verificamos se o type for 4, sabemos que ele vai estar completo
-          //Como sabemos isso? Fazendo um console.log do response(event), vai ter um campo chamado type dele
-          if (event.type === HttpEventType.Response) {
-            console.log('upload concluido');
-            //Se for type 3,significa que estamos fazendo o upload, então vai ter uma porcentagem
-          } else if (event?.type === HttpEventType.UploadProgress) {
-           //Esses dois pipes || ali no total é o falback operator (logical operator), pq o event.total pode ser undefined
-           //então caso for assim eu seto zero
-           //Pelo que eu vi da pra usar o nullish coalescing operator
-           const percentDone = Math.round((event.loaded * 100)/ (event.total || 1));
-           console.log("Progresso: "+percentDone)
-           //sempre que a gente fizer um progresso a gente seta o progresso
-           this.progress = percentDone;
-          }
-        });
+        .upload(this.files, '/api/upload').pipe(
+          uploadProgresso(progress => {
+            console.log(progress);
+            this.progress = progress;
+          }),
+          filtrarResponse()
+        ).subscribe(response => console.log("Upload concluido"));
     }
-  }
+}
+
+
+
+
+  //Esse metodo de baixo é sem o custom  rxjs operators do angular
+  // onUpload() {
+  //   if (this.files && this.files.size > 0) {
+  //     //Aqui substituimos o localhost por api, e ela é setada no arquivo proxy.config
+  //     //nos vamos faazer assim pois desabilitamos o CORS na api node e jogamos essa configuração de acesso para esse arquivo de proxy
+  //     this.service
+  //       .upload(this.files, '/api/upload')
+  //       //this.service.upload(this.files,'http://localhost:8000/upload')
+  //       //Aqui nos tipamos o que recebemos no subscribe como event do tipo HttpEvent que vai ser Object
+  //       //vai ser object pq as vezes pode ser um response, um header response, um progresso, etc
+  //       //nos vamos tipar pq vai ser mais facil pegar o auto complete
+  //       .subscribe((event: HttpEvent<Object>) => {
+  //         //Aqui verificamos se o type for 4, sabemos que ele vai estar completo
+  //         //Como sabemos isso? Fazendo um console.log do response(event), vai ter um campo chamado type dele
+  //         if (event.type === HttpEventType.Response) {
+  //           console.log('upload concluido');
+  //           //Se for type 3,significa que estamos fazendo o upload, então vai ter uma porcentagem
+  //         } else if (event?.type === HttpEventType.UploadProgress) {
+  //          //Esses dois pipes || ali no total é o falback operator (logical operator), pq o event.total pode ser undefined
+  //          //então caso for assim eu seto zero
+  //          //Pelo que eu vi da pra usar o nullish coalescing operator
+  //          const percentDone = Math.round((event.loaded * 100)/ (event.total || 1));
+  //          console.log("Progresso: "+percentDone)
+  //          //sempre que a gente fizer um progresso a gente seta o progresso
+  //          this.progress = percentDone;
+  //         }
+  //       });
+  //   }
+  // }
 }
