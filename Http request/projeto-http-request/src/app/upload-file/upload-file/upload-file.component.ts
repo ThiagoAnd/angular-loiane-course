@@ -2,6 +2,7 @@ import { UploadFileService } from './../upload-file.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpEventType, HttpEvent } from '@angular/common/http';
 import { filtrarResponse, uploadProgresso } from '../../shared/rxjs-operators';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-upload-file',
@@ -54,6 +55,23 @@ onUpload(){
           filtrarResponse()
         ).subscribe(response => console.log("Upload concluido"));
     }
+}
+
+//O angular não lida com a parte de download de arquivos, quem é responsavel é o browser
+//pra fazer od ownload em si, quem faz eh o javascript puro, dependendo de cada browser
+//o angular somente fornece a part de fazer o request para a url do endpoint
+onDownloadExcel(){
+this.service.download('api/downloadExcel')
+.subscribe((res:any) => {
+  this.service.handleFile(res,'reportbaixado.xlsx')
+});
+}
+
+onDownloadPdf(){
+  this.service.download('api/downloadPdf')
+  .subscribe((res:any) => {
+    this.service.handleFile(res,'reportbaixado.pdf')
+  });
 }
 
 

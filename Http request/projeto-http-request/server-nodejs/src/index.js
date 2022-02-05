@@ -44,12 +44,34 @@ app.post('/upload',multiplartMiddleWare,(req,resp)=>{
   const files = req.files;
   console.log(files)
 
+
+
   //manda um json novamente para o angular
   req.json({message: files});
 })
 
+ //Novo endpoint para fazer download de excel
+ app.get('/downloadExcel',(req,res)=>{
+  res.download('./uploads/thiago.xlsx')
+})
+
+ //Novo endpoint para fazer download de pdf
+ //Para chamar direto seria localhost:8000/downloadPdf
+ app.get('/downloadPdf',(req,res)=>{
+   console.log("teste download pdf")
+  res.download('./uploads/thiago.pdf')
+})
+
 //funcao que vai capturar qualquer erro mp servidor
 app.use((err,req,res,next) => res.json({error : err.message}))
+
+
+//Mostra todas as rotas criadas quando vc executa o servidor
+app._router.stack.forEach(function(r){
+  if (r.route && r.route.path){
+    console.log(r.route.path)
+  }
+})
 
 app.listen(8000,()=>{
   console.log('servidor iniciado na porta 8000')
