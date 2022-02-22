@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/projeto-http-request",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
