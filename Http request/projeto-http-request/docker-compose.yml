@@ -1,0 +1,9 @@
+version: '3.4'
+# aqui significa que o nome da imagem vai ser curso-angular, e ela vai ser gerada pelo build do dockerfile que esta em ponto
+#e vai fazer o binding na porta 8081
+services:
+  projetohttprequest:
+    image: curso-angular
+    build: .
+    ports:
+      - 8081:80
