@@ -1,0 +1,35 @@
+<br>                        
+<h6 class="alert alert-primary">NGCLASS</h6>
+<br>
+
+<i class=" fa fa-star "  hidden></i>
+<i class="fa fa-circle" hidden></i>
+
+<p>Clicar no icone: aqui é utilizado ainda o Class binding (uma forma de property binding)</p>
+<h1>
+    <i class=" fa" 
+    
+    [class.fa-circle]="!meuFavorito"
+    [class.fa-star]="meuFavorito"
+
+    (click)="mudarFavorito()"
+    
+    ></i>
+
+</h1>
+
+<br>
+<p>Clicar no icone: aqui é utilizado o ngClass que é muito util quando temos varias classes</p>
+<h1>
+    <i class=" fa" 
+
+    [ngClass]="{
+        'fa-circle': !meuFavorito,
+        'fa-star':     meuFavorito
+    }"
+    
+    (click)="mudarFavorito()"
+    
+    ></i>
+
+</h1>

@@ -1,0 +1,9 @@
+<p>cursos works!</p>
+<input type="text" #cursoInput>
+<button (click)="adicionarCurso(cursoInput.value)">Salvar</button>
+<br>
+<ul>
+    <li *ngFor="let pipoca of cursos">
+        {{pipoca}}
+    </li>
+</ul>

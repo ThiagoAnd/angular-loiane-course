@@ -1,0 +1,27 @@
+<br>
+<h6 class="alert alert-primary">NGIF</h6>
+
+<div *ngIf="cursos.length > 0">
+    Lista de cursos
+</div>
+<div *ngIf="cursos.length == 0">
+    Não existem cursos
+</div>
+
+<div *ngIf="mostrarCursos">
+    Lista de cursos boolean
+</div>
+<div *ngIf="!mostrarCursos">
+    Não existem cursos boolean
+</div>
+
+<div [hidden]="!mostrarCursos">
+    Lista de cursos hidden
+</div>
+<div [hidden]="mostrarCursos">
+    Não existem cursos hidden
+</div>
+
+<br>
+
+<button (click)="toggleCursos()">Toggle Cursos</button>

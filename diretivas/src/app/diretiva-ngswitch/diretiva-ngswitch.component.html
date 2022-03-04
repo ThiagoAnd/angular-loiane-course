@@ -1,0 +1,28 @@
+<br><br>                        
+<h6 class="alert alert-primary">NGSWITCH</h6>
+<br>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Navbar</a>
+   
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a [class.active]="aba == 'home'" (click)="aba = 'home'" class="nav-item nav-link " href="#">Home </a>
+        <a [class.active]="aba == 'mapa'" (click)="aba = 'mapa'"  class="nav-item nav-link" href="#">mapa</a>
+        <a [class.active]="aba == 'lista'" (click)="aba = 'lista'"  class="nav-item nav-link" href="#">lista</a>
+      
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" [ngSwitch]="aba">
+      <p *ngSwitchCase="'home'">Modo home ativado</p>
+      <p *ngSwitchCase="'mapa'">Modo mapa ativado</p>
+      <p *ngSwitchCase="'lista'">Modo lista ativado</p>
+      <p *ngSwitchDefault>Modo default ativado</p>
+
+
+  </div>
+
+
+

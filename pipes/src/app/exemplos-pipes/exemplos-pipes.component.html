@@ -1,0 +1,19 @@
+<p>Exemplo pipes</p>
+
+<br>
+<p>Titulo: {{livro.titulo | uppercase}}</p>
+<p>Numero de paginas: {{livro.numeroPaginas | number}}</p>
+<p>Preco: {{livro.preco | currency:'BRL'}}</p>
+<p>Minimo de uma casa decima a duas casas decimais</p>
+<p>Estrelas: {{4.578724 | number:'2.1-2'}}</p>
+<p>Lançamento: {{livro.lancamento | date:'dd-MM-yyyy'}}</p>
+<br>
+<p>Livro: {{livro | json}}</p>
+
+<h2>Pipe assincrono: \\ nomeVariavel | async \\ utilizando promesas</h2>
+<h3>Esse pipe serve para conseguir fazer a saida no template mesmo que o valor demore um pouco.<br>Ele é utilizado bastante quando precisamos buscar o valor no servidor e isso pode demorar alguns segundos<br>
+e com ele não vamos obter um erro que normalmente pode acontecer, então utilizando o pipe async no exemplo abaixo<br>
+conseguimos mostrar a mensagem depois de 2 segundos sem mostrar nenhum erro. Ele é muito utilizado quando sabemos que uma requisição no servidor pode demorar</h3>
+<p>{{valorAsync | async}}</p>
+
+

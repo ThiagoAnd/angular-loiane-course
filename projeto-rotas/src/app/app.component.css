@@ -1,0 +1,23 @@
+.menu-spacer{
+    margin-right: 20px;
+}
+
+div a {
+    margin-left: 15px;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    color: coral;
+}
+
+.link{
+    color: tan;
+    cursor: pointer;
+}
+
+.section{
+    padding-top: 10px;
+}

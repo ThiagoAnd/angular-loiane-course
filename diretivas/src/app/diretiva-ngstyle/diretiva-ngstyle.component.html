@@ -1,0 +1,39 @@
+<br>                        
+<h6 class="alert alert-primary">NGSTYLE</h6>
+<br>
+
+<p>Aqui é utilizado o style binding normal</p>
+
+
+<button 
+[style.backgroundColor]="ativo ? 'blue' : 'gray' "
+[style.color]="ativo ? 'white' : 'black' "
+[style.fontWeight]="ativo ? 'bold' : 'normal' "
+[style.fontSize]="tamanhoFonte+'px' "
+(click)="mudarEstilo()"
+>
+Mudar estilo do botão
+</button>
+
+<br>
+
+<p>Aqui ja é utilizado o ngstyle</p>
+<button 
+[ngStyle]="{
+   'backgroundColor' : ativo ? 'green' : 'yellow',
+   'color' : ativo ? 'white' : 'black' ,
+   'fontWeight' : ativo ? 'bold' : 'normal',
+   'fontSize' : tamanhoFonte+'px'
+}"
+
+
+(click)="mudarEstilo()"
+>
+Mudar estilo do botão
+</button>
+
+<br>
+
+
+<input type="text" [(ngModel)]="tamanhoFonte"/>
+

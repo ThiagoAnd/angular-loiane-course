@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+     
+      <h1 class="link" routerLink="/">ProjetoRotas</h1>
+      
+     
+      <span class="menu-spacer"></span>
+   
+      <div>
+        <a mat-button  routerLink="/login"> Login </a>
+        <a mat-button routerLink="/cursos"> Cursos </a>
+
+
+        <a mat-button routerLink="/cursos/" [queryParams]="{pagina:1}"> Query params com a rota curso </a>
+
+        
+        <a mat-button routerLink="curso/{{idCurso.value}}"> Curso com outra forma de id </a>
+        <a mat-button [routerLink]="['/curso',idCurso.value]"> Curso com id </a>
+     
+  
+      </div>
+    </mat-toolbar-row>
+  
+  </mat-toolbar>
+<div class="section">
+
+  
+  <p>Entre com o id do curso</p>
+  <input #idCurso type="text">
+
+
+  
+
+
+
+  <br><br>
+<router-outlet></router-outlet>
+</div>

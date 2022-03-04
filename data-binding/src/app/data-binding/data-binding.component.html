@@ -1,0 +1,149 @@
+
+<section>
+  <article>
+    <h3>
+      Output property
+    </h3>
+   
+    <contador [valor]="valorInicial"
+    (mudouValor)="onMudouValorContador($event)"
+    ></contador>
+  </article>
+</section>
+
+
+<div class="alert alert-secondary" style="width: 1000px;"></div>
+
+<section>
+  <article>
+    <h3>
+      Input property
+    </h3>
+    <h2>{{nomeCurso}}</h2>
+    <app-curso [nome]="nomeCurso"></app-curso>
+  </article>
+</section>
+
+
+<div class="alert alert-secondary" style="width: 1000px;"></div>
+
+<section>
+  <article>
+    <h3>Two way data binding</h3>
+    <p>o [value]= nome pega a variavel nome e coloca no value</p>
+    <p>O campo de input tem um evento chamado (input) que executa quando o campo é atualizado</p>
+    <input 
+    (input)="nome= $event.target.value"
+    [value]="nome"
+    type="text"/>
+    <br>
+    <p>Utilizando o ngModel abaixo com property e event bind</p>
+    <input 
+    [ngModel]="nome"
+    (ngModelChange)="nome=$event"   
+    type="text"/>
+    <p>Utilizando o two way data bind abaixo. é um bind de propriedade junto com bind de evento</p>
+    <input
+    [(ngModel)]="nome"
+    type="text"
+    />
+    <p>Voce digitou: {{nome}}</p>
+
+    <div>
+<p>Meu nome é {{pessoa.nome}} e eu tenho {{pessoa.idade}} anos de idade</p>
+      <input [(ngModel)]="pessoa.nome"/>
+      <input [(ngModel)]="pessoa.idade"/>
+    </div>
+  </article>
+</section>
+
+<br>
+<br>
+<br>
+<div class="alert alert-secondary" style="width: 1000px;"></div>
+<section>
+  <article>
+    <h3>Event binding</h3>
+    <button (click)="metodoClicar()" class="btn btn-primary"> Me clique</button>
+    <br>
+    <!--O Dollar é para ser usado quando quiser capturar o evento-->
+    <input type="text" 
+
+    #variavelLocalInputQueReferenciaOEventTarget
+
+    (keyup)="metodoKeyUp($event)"
+    (keyup.enter)="metodoKeyUpEnter($event.target.value)"
+    (blur)="metodoBlurComVariavelLocal(variavelLocalInputQueReferenciaOEventTarget.value)"
+
+    />
+    <p>Valor do input: {{valorAtualInput}}</p>
+   <p>Valor salvo com enter: {{valorSalvoEnter}}</p>
+   <p>Valor quando tira o foco, ou seja quando clica fora do input: {{valorBlur}}</p>
+
+  <br>
+  <span
+  (mouseover)="metodoMouseOver()"
+  (mouseout)="metodoMouseOver()"
+  [class.classeDoSpan]="isMouseBoolean"
+  >Passe o mouse sobre mim, boolean com classe</span>
+  </article>
+</section>
+<br><br>
+<section>
+    <article>
+        CSS e style binding// fiz outra coisa, só instalei o bootstrap
+<br>
+<!-- O #classeDrop é uma variavel local que vai acessar o OPTION do select-->
+        <select #classeDrop (change)="0" name="" id="">
+            <option value="alert-success">Sucesso</option>
+            <option value="alert-info">Info</option>
+            <option value="alert-warning">Warning</option>
+            <option value="alert-danger">Danger</option>
+        </select>
+        <br>
+        <br>
+     <!-- Aqui é o class binding-->
+     <div class="alert alert-danger" [style.display]="classeDrop.value == 'alert-danger' ? 'block' : 'none' "  
+     role="alert" >
+        Este texto só aparece quando tiver erro selecionado, tem um style binding
+      </div>
+
+          <div class="alert " role="alert" [class.alert-success]="classeDrop.value == 'alert-success'">
+            This is a success alert—check it out!
+          </div>
+
+          <div class="alert " role="alert" [class.alert-danger]="classeDrop.value == 'alert-danger'">
+            This is a danger alert—check it out!
+          </div>
+          <div class="alert " role="alert" [class.alert-warning]="classeDrop.value == 'alert-warning'">
+            This is a warning alert—check it out!
+          </div>
+          <div class="alert " role="alert" [class.alert-info]="classeDrop.value == 'alert-info'">
+            This is a info alert—check it out!
+          </div>
+
+          <div class="alert {{classeDrop.value}}" >
+              Valor colorido conforme combo box
+          </div>
+        
+    </article>
+<br>
+<br>
+<br>
+<br>
+<div class="alert alert-secondary" style="width: 1000px;"></div>
+    <article>
+        <h3>
+            Interpolation/interpolação
+        </h3>
+        <p>String renderizada com interpolação: {{url}}</p>
+        <p>Resolvendo matematica dentro da interpolação: {{7+5}}</p>
+        <p>Resolvendo matematica com interpolação e metodo: {{1+1+getValor()}}</p>
+        <p>Interpolação</p>
+        <img src="{{urlImagem}}">
+        <p>Property binding</p>
+        <img [src] = "urlImagem" >
+    </article>
+
+    
+</section>
